@@ -1,11 +1,11 @@
 using Java.Util.Concurrent;
 using Plugin.FileUploader.Abstractions;
-using OkHttp;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.Webkit;
 using System.Collections.ObjectModel;
+using Square.OkHttp3;
 
 namespace Plugin.FileUploader
 {
@@ -189,19 +189,17 @@ namespace Plugin.FileUploader
         }
 
 
-        MultipartBuilder PrepareRequest(IDictionary<string, string> parameters = null,string boundary = null)
+        MultipartBody.Builder PrepareRequest(IDictionary<string, string> parameters = null,string boundary = null)
         {
-            MultipartBuilder requestBodyBuilder = null;
+            MultipartBody.Builder requestBodyBuilder = null;
 
             if(string.IsNullOrEmpty(boundary))
             {
-                requestBodyBuilder = new MultipartBuilder()
-                        .Type(MultipartBuilder.Form);
+                requestBodyBuilder = new MultipartBody.Builder(boundary).SetType(MultipartBody.Form);
             }
             else
             {
-                requestBodyBuilder = new MultipartBuilder(boundary)
-                        .Type(MultipartBuilder.Form);
+                requestBodyBuilder = new MultipartBody.Builder(boundary).SetType(MultipartBody.Form);
             }
 
             if (parameters != null)
@@ -216,7 +214,7 @@ namespace Plugin.FileUploader
             }
             return requestBodyBuilder;
         }
-        FileUploadResponse MakeRequest(string url,string tag,  MultipartBuilder requestBodyBuilder, IDictionary<string, string> headers = null)
+        FileUploadResponse MakeRequest(string url,string tag,  MultipartBody.Builder requestBodyBuilder, IDictionary<string, string> headers = null)
         {
             //RequestBody requestBody = requestBodyBuilder.Build();
             CountingRequestBody requestBody = new CountingRequestBody(requestBodyBuilder.Build(),tag,this);
@@ -232,16 +230,18 @@ namespace Plugin.FileUploader
                     }
                 }
             }
-
+            
             Request request = requestBuilder
                 .Url(url)
-                .Post(requestBody)
+                .Post(requestBody)               
                 .Build();
 
-            OkHttpClient client = new OkHttpClient();
-            client.SetConnectTimeout(ConnectUploadTimeout, UploadTimeoutUnit); // connect timeout
-            client.SetReadTimeout(SocketUploadTimeout, UploadTimeoutUnit);    // socket timeout
+            var builder = new OkHttpClient.Builder();
+            builder.ConnectTimeout(ConnectUploadTimeout, UploadTimeoutUnit);
+            builder.ReadTimeout(SocketUploadTimeout, UploadTimeoutUnit);
 
+            var client = builder.Build();
+           
             Response response = client.NewCall(request).Execute();
             var responseString = response.Body().String();
             var code = response.Code();

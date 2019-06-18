@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using OkHttp;
-using OkHttp.Okio;
+﻿
+using Square.OkHttp3;
+using Square.OkIO;
 
 namespace Plugin.FileUploader
 {
@@ -36,25 +26,25 @@ namespace Plugin.FileUploader
             return _body.ContentLength();
         }
 
-        public override void WriteTo(OkHttp.Okio.IBufferedSink p0)
+        public override void WriteTo(IBufferedSink p0)
         {
 
             try
             {
                 IBufferedSink bufferedSink;
                 countingSink = new CountingSink(this, p0);
-                bufferedSink = Okio.Buffer(countingSink);
+                bufferedSink = OkIO.Buffer(countingSink);
 
                 _body.WriteTo(bufferedSink);
 
                 bufferedSink.Flush();
             }
-            catch(Java.IO.IOException ex)
+            catch (Java.IO.IOException ex)
             {
-                _listener?.OnError(_tag,ex.ToString());
+                _listener?.OnError(_tag, ex.ToString());
             }
-           
-         
+
+
         }
 
         public class CountingSink : ForwardingSink
@@ -74,13 +64,13 @@ namespace Plugin.FileUploader
                     base.Write(p0, p1);
 
                     bytesWritten += p1;
-                    _parent?._listener.OnProgress(_parent._tag,bytesWritten, _parent.ContentLength());
+                    _parent?._listener.OnProgress(_parent._tag, bytesWritten, _parent.ContentLength());
                 }
                 catch (Java.IO.IOException ex)
                 {
                     _parent?._listener?.OnError(_parent._tag, ex.ToString());
                 }
-       
+
             }
 
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Android.Webkit;
 using System.Collections.ObjectModel;
 using Square.OkHttp3;
+#pragma warning disable 4014
 
 namespace Plugin.FileUploader
 {
@@ -195,7 +196,7 @@ namespace Plugin.FileUploader
 
             if(string.IsNullOrEmpty(boundary))
             {
-                requestBodyBuilder = new MultipartBody.Builder(boundary).SetType(MultipartBody.Form);
+                requestBodyBuilder = new MultipartBody.Builder().SetType(MultipartBody.Form);
             }
             else
             {

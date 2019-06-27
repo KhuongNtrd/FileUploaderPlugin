@@ -28,7 +28,7 @@ namespace Plugin.FileUploader
 
     static IFileUploader CreateFileUploader()
     {
-#if NETSTANDARD1_0
+#if NETSTANDARD2_0
         return null;
 #else
         return new FileUploadManager();

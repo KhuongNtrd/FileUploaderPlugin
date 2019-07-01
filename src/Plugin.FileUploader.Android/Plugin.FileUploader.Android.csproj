@@ -38,13 +38,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
-    <Reference Include="mscorlib" />
-    <Reference Include="Square.OkHttp3, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Locator\packages\Square.OkHttp3.3.8.1\lib\MonoAndroid\Square.OkHttp3.dll</HintPath>
-    </Reference>
-    <Reference Include="Square.OkIO, Version=1.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Locator\packages\Square.OkIO.1.13.0\lib\MonoAndroid\Square.OkIO.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Square.OkHttp3">
+      <Version>3.8.1</Version>
+    </PackageReference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -58,10 +54,6 @@
     <Compile Include="ICountProgressListener.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\ModernHttpClient\ModernHttpClient.Android\ModernHttpClient.Android.csproj">

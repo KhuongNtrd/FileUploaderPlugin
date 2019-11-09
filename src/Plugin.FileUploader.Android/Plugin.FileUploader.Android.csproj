@@ -14,7 +14,6 @@
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <DevInstrumentationEnabled>True</DevInstrumentationEnabled>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
@@ -34,10 +33,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Plugin.FileUploader.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Java.Interop" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ModernHttpClient">
       <HintPath>..\..\..\binary\Android\ModernHttpClient.dll</HintPath>
@@ -65,30 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Square.OkHttp3">
-      <Version>3.14.2</Version>
-    </PackageReference>
-    <PackageReference Include="Square.OkIO">
-      <Version>2.2.2</Version>
+      <Version>4.2.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Plugin.FileUploader.Shared\Plugin.FileUploader.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets" Condition="Exists('..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Jetbrains.Annotations.13.0.0\build\monoandroid90\Xamarin.Jetbrains.Annotations.targets'))" />
-    <Error Condition="!Exists('..\packages\Xamarin.Kotlin.StdLib.Common.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Kotlin.StdLib.Common.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\Xamarin.Kotlin.StdLib.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Kotlin.StdLib.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.targets'))" />
-  </Target>
-  <Import Project="..\packages\Xamarin.Kotlin.StdLib.Common.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets" Condition="Exists('..\packages\Xamarin.Kotlin.StdLib.Common.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.Common.targets')" />
-  <Import Project="..\packages\Xamarin.Kotlin.StdLib.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.targets" Condition="Exists('..\packages\Xamarin.Kotlin.StdLib.1.2.71\build\monoandroid90\Xamarin.Kotlin.StdLib.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

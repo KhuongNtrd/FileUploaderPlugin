@@ -36,9 +36,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ModernHttpClient">
-      <HintPath>..\..\..\binary\Android\ModernHttpClient.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,8 +58,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Square.OkHttp3">
-      <Version>4.2.2</Version>
+    <PackageReference Include="modernhttpclient">
+      <Version>25.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Plugin.FileUploader.Shared\Plugin.FileUploader.Shared.projitems" Label="Shared" />
